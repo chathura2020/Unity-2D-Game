@@ -12,7 +12,8 @@ public class Player : MonoBehaviour {
 	public Transform startPos;
 	public Transform endPos;
 	public LayerMask groundLayer;
-
+	public static int score = 0;
+	public GUISkin theSkin;
 	// Use this for initialization
 	void Start () {
 		_myRigidBody = this.rigidbody2D;
@@ -71,13 +72,25 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col) {
 
 		if(col.gameObject.tag=="Coin"){
+			score++;
 			col.gameObject.collider2D.enabled = false;
 			col.gameObject.renderer.enabled = false;
 			audio.Play();
 		}
 
-
 	}
 
+
+	void OnGUI(){
+		GUI.skin = theSkin;
+		GUI.Label(new Rect(Screen.width/2-150-18,20,100,100),""+"Score : " +score);
+		//GUI.Label(new Rect(Screen.width/2+150-18,20,100,100),""+playerScore02);
+		
+		//if(GUI.Button(new Rect(Screen.width/2-121/2,35,121,53),"RESET")){
+
+			//GameObject.FindGameObjectWithTag("Ball").SendMessage("ResetBall");
+			//theBall.SendMessage("ResetBall");
+		//}
+	}
 
 }
